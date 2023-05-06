@@ -6,10 +6,11 @@ public class BlockManager : MonoBehaviour
     private List<Block> _blockList = new List<Block>();
     private System.Random _rand = null;
     private bool _slotLeft = true;
+    private int _dmgSum = 0;
 
-    public bool SlotLeft
+    public int DmgSum
     {
-        get { return _slotLeft; }
+        get => _dmgSum;
     }
 
     public void Init()
@@ -25,6 +26,8 @@ public class BlockManager : MonoBehaviour
             }
         }
 
+        SetDamage();
+
         _rand = new System.Random();
     }
 
@@ -34,6 +37,17 @@ public class BlockManager : MonoBehaviour
         foreach (Block block in _blockList)
         {
             block.Shoot();
+        }
+    }
+
+    public void SetDamage()
+    {
+        _dmgSum = 0;
+
+        foreach (Block block in _blockList)
+        {
+            if (block.Active)
+                _dmgSum += (int)Mathf.Pow(2, block.Level);
         }
     }
 
@@ -62,6 +76,8 @@ public class BlockManager : MonoBehaviour
             if (!_blockList[slotNum].Active)
                 break;
         }
+
+        SetDamage();
 
         return _blockList[slotNum];
     }

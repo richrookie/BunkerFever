@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour
     public bool GameStateEnd => _cureGameState == Define.eGameState.End;
 
 
+    private UI_GameScene _uiGameScene = null;
     private BlockManager _blockManager = null;
     private MonsterManager _monsterManager = null;
     private UserController _userController = null;
 
+    public UI_GameScene uiGameScene { get { CheckNull(); return _uiGameScene; } }
     public BlockManager blockManager { get { CheckNull(); return _blockManager; } }
     public MonsterManager monsterManager { get { CheckNull(); return _monsterManager; } }
     public UserController userController { get { CheckNull(); return _userController; } }
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckNull()
     {
+        if (_uiGameScene == null) _uiGameScene = FindObjectOfType<UI_GameScene>() as UI_GameScene;
         if (_blockManager == null) _blockManager = FindObjectOfType<BlockManager>() as BlockManager;
         if (_monsterManager == null) _monsterManager = FindObjectOfType<MonsterManager>() as MonsterManager;
         if (_userController == null) _userController = FindObjectOfType<UserController>() as UserController;

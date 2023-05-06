@@ -25,29 +25,26 @@ public class UserController : MonoBehaviour
     {
         if (Managers.Game.GameStatePlay)
         {
-            if (Managers.Game.blockManager.SlotLeft)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
 
-                    if (Physics.Raycast(ray, out hit, Mathf.Infinity, _layerBunker))
-                    {
-                        _dragBunker = hit.transform.gameObject;
-                        _dragBlock = hit.transform.GetComponent<Bunker>().block;
-                    }
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, _layerBunker))
+                {
+                    _dragBunker = hit.transform.gameObject;
+                    _dragBlock = hit.transform.GetComponent<Bunker>().block;
+                }
 
-                    Shoot();
-                }
-                else if (Input.GetMouseButton(0))
-                {
-                    MoveBunker();
-                }
-                else if (Input.GetMouseButtonUp(0))
-                {
-                    DropBunker();
-                }
+                Shoot();
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                MoveBunker();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                DropBunker();
             }
         }
     }
@@ -55,6 +52,8 @@ public class UserController : MonoBehaviour
 
     private IEnumerator CorBunkerShoot()
     {
+        yield return Util.WaitGet(2f);
+
         while (true)
         {
             Shoot();
@@ -97,6 +96,8 @@ public class UserController : MonoBehaviour
                     // === Check Merge === //
                     _dropBlock.CheckMerge(_dragBlock);
                     // === Check Merge === //
+
+                    Managers.Game.blockManager.SetDamage();
                 }
                 else
                 {// block에 bunker가 없을 경우
@@ -117,7 +118,10 @@ public class UserController : MonoBehaviour
 
     private void Shoot()
     {
-        Managers.Game.monsterManager.Damaged();
-        Managers.Game.blockManager.Shoot();
+        if (Managers.Game.blockManager.DmgSum > 0)
+        {
+            Managers.Game.monsterManager.Damaged(Managers.Game.blockManager.DmgSum);
+            Managers.Game.blockManager.Shoot();
+        }
     }
 }

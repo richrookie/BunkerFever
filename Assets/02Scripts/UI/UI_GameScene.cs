@@ -33,14 +33,24 @@ public class UI_GameScene : UI_Scene
             // === Bunker Buy Button === //
         });
 
+        ResetHpBar();
+    }
+
+    public void ResetHpBar()
+    {
         GetImage(Images.HpBar).fillAmount = 1f;
     }
 
-    public void SetHpBar(float dmg)
+    public void SetHpBar(float leftHp)
     {
-        if (GetImage(Images.HpBar).fillAmount - dmg <= 0)
+        if (leftHp <= 0)
+        {
+            GetImage(Images.HpBar).fillAmount = 0;
             Managers.Game.monsterManager.SpawnMonster();
 
-        GetImage(Images.HpBar).fillAmount -= dmg;
+            return;
+        }
+
+        GetImage(Images.HpBar).fillAmount = leftHp;
     }
 }

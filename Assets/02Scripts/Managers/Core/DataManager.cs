@@ -43,6 +43,9 @@ public class DataManager
         set
         {
             _monsterNum = value;
+            if (_monsterNum > 3)
+                _monsterNum = 1;
+
             ES3.Save<int>("MonsterNum", value);
         }
     }

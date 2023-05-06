@@ -25,13 +25,14 @@ public class MonsterManager : MonoBehaviour
 
         GameObject monster = Managers.Resource.Instantiate($"Monster{Managers.Data.MonsterNum.ToString("D3")}", this.transform);
         _monster = monster.GetComponent<Monster>();
+        _monster.Init();
     }
 
-    public void Damaged()
+    public void Damaged(int dmg)
     {
         if (_monster != null)
         {
-            _monster.Damaged();
+            _monster.Damaged(dmg);
         }
         else
         {
