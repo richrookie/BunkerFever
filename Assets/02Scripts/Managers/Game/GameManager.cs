@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour
 
     public void Init()
     {
-        ES3.DeleteFile();
-
         CheckNull();
 
         blockManager.Init();

@@ -19,10 +19,7 @@ public class Block : MonoBehaviour
     {
         get { return _active; }
     }
-    public Bunker bunker
-    {
-        get { return _bunker; }
-    }
+
 
     public void Init(int slotNum, bool active, int level)
     {
