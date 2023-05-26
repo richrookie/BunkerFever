@@ -90,24 +90,31 @@ public class UserController : MonoBehaviour
             {
                 _dropBlock = hit.transform.GetComponent<Block>();
 
-                if (_dropBlock.Active)
-                {// block에 bunker가 있을 경우
-                    // === Check Merge === //
-                    _dropBlock.CheckMerge(_dragBlock);
-                    // === Check Merge === //
+                if (_dragBunker.GetComponent<Bunker>().block != _dropBlock)
+                {
+                    if (_dropBlock.Active)
+                    {// block에 bunker가 있을 경우
+                        // === Check Merge === //
+                        _dropBlock.CheckMerge(_dragBlock);
+                        // === Check Merge === //
 
-                    Managers.Game.blockManager.SetDamage();
+                        Managers.Game.blockManager.SetDamage();
+                    }
+                    else
+                    {// block에 bunker가 없을 경우
+                        // === Move Bunker Slot === //
+                        _dropBlock.Moved(_dragBlock);
+                        // === Move Bunker Slot === //
+                    }
                 }
                 else
-                {// block에 bunker가 없을 경우
-                    // === Move Bunker Slot === //
-                    _dropBlock.Moved(_dragBlock);
-                    // === Move Bunker Slot === //
+                {
+                    _dragBunker.transform.localPosition = Vector3.zero;
                 }
             }
             else
             {
-                _dragBlock.Clear();
+                _dragBunker.transform.localPosition = Vector3.zero;
             }
         }
 
