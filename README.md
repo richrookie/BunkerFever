@@ -1,5 +1,5 @@
 # BunkerFever Portfolio
-• Project Outline : 단순 터치를 통하여 적을 때리고, 얻은 재화로 벙커를 뽑아서 Merge하는 게임!<br>
+• Project Outline : 단순 터치를 통하여 적을 때려 재화를 얻고, 얻은 재화로 벙커를 뽑아 Merge하여 강해지는 게임!<br>
 • Role : Client Programmer<br>
 • Platform : aos, ios<br>
 • Core Logic : UserController.cs
