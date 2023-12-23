@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BUNKER MATERIAL Floor
-  m_Shader: {fileID: 10707, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 6, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _EMISSION
@@ -112,6 +112,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 0
+    - _Shininess: 0.7
     - _Smoothness: 0.2
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -122,6 +123,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Emission: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 0}
     - _EmissionColor: {r: 0.3529412, g: 0.3529412, b: 0.3529412, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
