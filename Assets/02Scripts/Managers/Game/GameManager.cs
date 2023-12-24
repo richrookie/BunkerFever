@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     {
         CheckNull();
 
+        Managers.Resource.Instantiate("Blocks");
+        Managers.Resource.Instantiate("Directional Light");
+
         blockManager.Init();
 
         GameObject mgr1 = new GameObject { name = "@MonsterManager " };

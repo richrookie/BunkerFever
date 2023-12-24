@@ -1,5 +1,5 @@
 using UnityEngine;
-using DG.Tweening;
+using System.Collections;
 
 public class Block : MonoBehaviour
 {
@@ -37,26 +37,42 @@ public class Block : MonoBehaviour
         _bunker.Init(this.GetComponent<Block>());
     }
 
-    private Tween _tween = null;
     public void Shoot()
     {
         if (_active)
         {
-            if (_tween != null)
-            {
-                _tween.Kill();
-                _tween = null;
-                _bunker.transform.localPosition = new Vector3(0, .15f, 0);
-            }
+            _bunker.transform.localPosition = new Vector3(0, .15f, 0);
 
             GameObject effect = Managers.Resource.Instantiate("Effect_BunkerShoot", this.transform);
             effect.transform.localPosition = new Vector3(0, 1f, 1.4f);
             effect.GetComponent<Poolable>().Timer(1.5f);
 
-            _tween = DOTween.Sequence()
-                            .Append(_bunker.transform.DOLocalMoveY(-.3f, .15f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo));
+            StartCoroutine(CorPressTank());
         }
     }
+
+    private IEnumerator CorPressTank()
+    {
+        // Lower the object
+        while (this.transform.position.y >= -.3f)
+        {
+            Vector3 newPos = this.transform.position;
+            newPos.y -= .15f;
+            this.transform.position = newPos;
+
+            yield return null;
+        }
+
+        // Raise the object
+        while (transform.position.y <= .15f)
+        {
+            Vector3 newPos = this.transform.position;
+            newPos.y += .15f;
+            this.transform.position = newPos;
+            yield return null;
+        }
+    }
+
 
     public void BuyBunker()
     {
